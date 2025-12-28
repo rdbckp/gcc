@@ -1,0 +1,39 @@
+name: Sedot gcc
+
+on:
+  workflow_dispatch:
+
+jobs:
+  download-and-commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Working for gcc
+      run: |
+        cd ${GITHUB_WORKSPACE}
+        git clone https://github.com/a02-trial/toolchain -b gcc11
+        mv toolchain gcc11
+        
+    - name: Configure Git
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "actions@github.com"
+        
+    - name: Add and Commit file
+      run: |
+        git add gcc.tar.gz
+        git commit -m "initial tree"
+        git push
+        
+    - name: Last Checking
+      run: |
+        cd ${GITHUB_WORKSPACE}
+        file gcc.tar.gz
+        tar xzvf gcc.tar.gz
+        rm -rf gcc
