@@ -17,6 +17,7 @@ jobs:
     - name: Working for gcc
       run: |
         cd ${GITHUB_WORKSPACE}
+        rm -rf gcc11
         git clone https://github.com/a02-trial/toolchain -b gcc11
         cd toolchain && mv * ${GITHUB_WORKSPACE}
         cd ..
