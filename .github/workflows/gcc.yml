@@ -27,6 +27,6 @@ jobs:
         
     - name: Add and Commit file
       run: |
-        git add gcc.tar.gz
+        git add *
         git commit -m "initial tree"
         git push
